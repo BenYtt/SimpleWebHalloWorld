@@ -35,6 +35,16 @@ stages:
         tags: |
           $(tag)
 
+- stage: Authenticate
+  displayName: Authenticating
+  jobs:
+  - job: Authenticate
+    steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: 'az container create -–resource-group benkacloud -–name benkaregistry -–image benkakaregistry.azurecr.io/webhelloworldimage:%TAG -–cpu 1 -–memory 1 –-registry-login-server %ACRLOGINSERVER –registry-username %ACRNAME –-registry-password %ACRPASSWORD'
+
 - stage: Deploy
   pool:
     vmImage: 'ubuntu-latest'
@@ -54,3 +64,4 @@ stages:
         DockerNamespace: '$(containeRregistry)'
         DockerRepository: '$(imagename)'
         DockerImageTag: '$(tag)'
+    
