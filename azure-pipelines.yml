@@ -43,7 +43,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: 'az container create -–resource-group benkacloud -–name benkaregistry -–image benkakaregistry.azurecr.io/webhelloworldimage:%TAG -–cpu 1 -–memory 1 –-registry-login-server %ACRLOGINSERVER –registry-username %ACRNAME –-registry-password %ACRPASSWORD'
+        script: 'az container create -–resource-group benkacloud -–name benkaregistry -–image benkaregistry.azurecr.io/webhelloworldimage:%TAG -–cpu 1 -–memory 1 –-registry-login-server %ACRLOGINSERVER –registry-username %ACRNAME –-registry-password %ACRPASSWORD'
 
 - stage: Deploy
   pool:
