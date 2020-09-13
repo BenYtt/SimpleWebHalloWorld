@@ -26,7 +26,7 @@ steps:
       inputs:
         restoreSolution: '$(solution)'
 
-        - task: VSBuild@1
+        - task: DotNetCoreCLI@2
           inputs:
             solution: '$(solution)'
             msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true'
