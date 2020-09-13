@@ -43,12 +43,15 @@ stages:
           $(tag)
 
 - stage: Deploy
+  pool:
+    vmImage: 'ubuntu-latest'
+
   jobs:
   - job: Deploy
     steps:
-    - task: AzureWebAppContainer@1
-      displayName: Azure Web App on Container Deploy
+    - task: Docker@2
       inputs:
-        appName: coolhelloworld
-        azureSubscription: 'Connection'
-        imageName: $(imageName)
+        containerRegistry: 'benkaregistry'
+        repository: $(imageRepository)
+        command: 'buildAndPush'
+        Dockerfile: $(dockerfilePath)
