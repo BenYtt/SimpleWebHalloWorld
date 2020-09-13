@@ -12,9 +12,3 @@ variables:
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: test
-    projects: '**/SimpleWebHalloWorld_tests/SimpleWebHalloWorld_tests.csproj'
-    arguments: '--configuration $(buildConfiguration)'
