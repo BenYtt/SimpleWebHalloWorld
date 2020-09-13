@@ -49,6 +49,6 @@ stages:
     - task: AzureWebAppContainer@1
       displayName: Azure Web App on Container Deploy
       inputs:
-        appName: webappforcontainers
+        appName: coolhelloworld
         azureSubscription: 'Connection'
         imageName: $(imageName)
