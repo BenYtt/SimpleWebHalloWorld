@@ -12,7 +12,7 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   imageName: webhelloworldimage
-  webAppName: benka
+  webAppName: webhelloworldinstance
   azureSubscription: Connection
   vmImageName: 'ubuntu-latest'
 
