@@ -16,5 +16,5 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: test
-    projects: '**/SimpleWebHalloWorld_tests/SimpleWebHalloWorld_tests.csproj'
+    projects: 'WebCD/SimpleWebHalloWorld_tests/SimpleWebHalloWorld_tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
