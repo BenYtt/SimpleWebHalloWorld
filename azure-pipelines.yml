@@ -12,7 +12,7 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   imageName: webhelloworldimage
-  webAppName: b04helloworld
+  webAppName: benka
   azureSubscription: Connection
   vmImageName: 'ubuntu-latest'
 
@@ -47,7 +47,7 @@ stages:
         ConnectionType: 'AzureRM'
         azureSubscription: 'Connection'
         appType: 'webAppContainer'
-        WebAppName: 'b04helloworld'
+        WebAppName: $(webAppName)
         deployToSlotOrASE: true
         ResourceGroupName: 'benkacloud'
         SlotName: 'production'
