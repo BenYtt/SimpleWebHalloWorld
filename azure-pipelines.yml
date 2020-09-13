@@ -16,7 +16,7 @@ variables:
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   imageName: benkaregistry.azurecr.io/benkakaregistry.azurecr.io/webhelloworldimage:$(tag)
-  azureSubscription: Subscription
+  # azureSubscription: Subscription
   # To ignore SSL error uncomment the following variable
   # VSTS_ARM_REST_IGNORE_SSL_ERRORS: true 
   
@@ -50,5 +50,5 @@ stages:
       displayName: Azure Web App on Container Deploy
       inputs:
         appName: webappforcontainers
-        azureSubscription: $(Connection)
+        azureSubscription: 'Connection'
         imageName: $(imageName)
