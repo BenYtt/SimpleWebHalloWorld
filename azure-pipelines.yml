@@ -39,17 +39,14 @@ stages:
           $(tag)
 
 - stage: Deploy
-  pool:
-    vmImage: 'ubuntu-latest'
   jobs:
   - job: Deploy
-    steps: 
-    - task: AzureRmWebAppDeployment@4
+    steps:
+    - task: AzureCLI@2
       inputs:
-        ConnectionType: 'AzureRM'
         azureSubscription: 'Connection'
-        appType: 'webAppContainer'
-        WebAppName: 'b04helloworld'
-        DockerNamespace: 'benkaregistry.azurecr.io'
-        DockerRepository: 'benkaregistry.azurecr.io/benyttsimplewebhalloworld'
-        DockerImageTag: '$(tag)'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az container create -–resource-group benkacloud -–name benkaregistry -–image benkakaregistry.azurecr.io/webhelloworldimage:$(tag) -–cpu 1 -–memory 1 –-registry-login-server $(acrLoginServer) –registry-username$(acrName) –-registry-password $(acrPassword)'
+        addSpnToEnvironment: true
+
