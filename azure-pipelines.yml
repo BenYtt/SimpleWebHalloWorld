@@ -15,6 +15,10 @@ variables:
   containerRegistry: 'benkaregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
+  imageName: benkaregistry.azurecr.io/benkakaregistry.azurecr.io/webhelloworldimage:$(tag)
+  # azureSubscription: Subscription
+  # To ignore SSL error uncomment the following variable
+  # VSTS_ARM_REST_IGNORE_SSL_ERRORS: true 
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -37,3 +41,17 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+
+- stage: Deploy
+  pool:
+    vmImage: 'ubuntu-latest'
+
+  jobs:
+  - job: Deploy
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'benkaregistry'
+        repository: $(imageRepository)
+        command: 'buildAndPush'
+        Dockerfile: $(dockerfilePath)
