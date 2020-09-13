@@ -15,6 +15,10 @@ variables:
   containerRegistry: 'benkaregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
+  imageName: benkaregistry.azurecr.io/benkakaregistry.azurecr.io/webhelloworldimage:$(tag)
+  azureSubscription: Subscription
+  # To ignore SSL error uncomment the following variable
+  # VSTS_ARM_REST_IGNORE_SSL_ERRORS: true 
   
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -42,11 +46,9 @@ stages:
   jobs:
   - job: Deploy
     steps:
-    - task: AzureCLI@2
+    - task: AzureWebAppContainer@1
+      displayName: Azure Web App on Container Deploy
       inputs:
-        azureSubscription: 'Connection'
-        scriptType: 'ps'
-        scriptLocation: 'inlineScript'
-        inlineScript: 'az container create -–resource-group benkacloud -–name benkaregistry -–image benkakaregistry.azurecr.io/webhelloworldimage:$(tag) -–cpu 1 -–memory 1 –-registry-login-server $(acrLoginServer) –registry-username$(acrName) –-registry-password $(acrPassword)'
-        addSpnToEnvironment: true
-
+        appName: webappforcontainers
+        azureSubscription: $(Subscription)
+        imageName: $(imageName)
