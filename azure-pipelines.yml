@@ -40,10 +40,13 @@ stages:
   jobs:
   - job: Authenticate
     steps:
-    - task: Bash@3
+    - task: AzureCLI@2
       inputs:
-        targetType: 'inline'
-        script: 'az container create -g benkacloud -–name %ACRNAME -–image %ACRLOGINSERVER/webhelloworldimage:%TAG -–cpu 1 -–memory 1 –-registry-login-server %ACRLOGINSERVER –registry-username %ACRNAME –-registry-password %ACRPASSWORD'
+        azureSubscription: 'Connection'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az container create --resource-group benkacloud --name benkaregistry --image $(acrLoginServer)/webhelloworldimage:$(tag) --cpu 1 --memory 1 --registry-login-server $(acrLogInServer) --registry-username $(acrName) --registry-password $(acrPassword) --dns-name-label horror-movie-app --ports 80'
+        addSpnToEnvironment: true
 
 - stage: Deploy
   pool:
