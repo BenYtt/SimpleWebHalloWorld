@@ -42,10 +42,15 @@ stages:
   jobs:
   - job: Deploy
     steps:
-    - task:  AzureWebApp@1
-      displayName: Azure Web App Deploy
+    - task: AzureRmWebAppDeployment@4
       inputs:
-        azuresubscription: $(azureSubscription)
-        appName: $(webAppName)
-        package: $(System.DefaultWorkingDirectory)/*/.zip
-        appType: webAppLinux
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'Connection'
+        appType: 'webAppContainer'
+        WebAppName: 'b04helloworld'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'benkacloud'
+        SlotName: 'production'
+        DockerNamespace: '$(containeRregistry)'
+        DockerRepository: '$(imagename)'
+        DockerImageTag: '$(tag)'
