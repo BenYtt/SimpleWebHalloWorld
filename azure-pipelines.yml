@@ -39,8 +39,6 @@ stages:
           $(tag)
 
 - stage: Deploy
-  dependsOn: Build
-  condition: succeded()
   pool:
     vmImage: 'ubuntu-latest'
   jobs:
