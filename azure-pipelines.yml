@@ -35,18 +35,18 @@ stages:
         tags: |
           $(tag)
 
-- stage: Authenticate
-  displayName: Authenticating
-  jobs:
-  - job: Authenticate
-    steps:
-    - task: AzureCLI@2
-      inputs:
-        azureSubscription: 'Connection'
-        scriptType: 'ps'
-        scriptLocation: 'inlineScript'
-        inlineScript: 'az container create --resource-group benkacloud --name benkaregistry --image $(acrLoginServer)/webhelloworldimage:$(tag) --cpu 1 --memory 1 --registry-login-server $(acrLogInServer) --registry-username $(acrName) --registry-password $(acrPassword) --dns-name-label horror-movie-app --ports 80'
-        addSpnToEnvironment: true
+# - stage: Authenticate
+#   displayName: Authenticating
+#   jobs:
+#   - job: Authenticate
+#     steps:
+#     - task: AzureCLI@2
+#       inputs:
+#         azureSubscription: 'Connection'
+#         scriptType: 'ps'
+#         scriptLocation: 'inlineScript'
+#         inlineScript: 'az container create --resource-group benkacloud --name benkaregistry --image $(acrLoginServer)/webhelloworldimage:$(tag) --cpu 1 --memory 1 --registry-login-server $(acrLogInServer) --registry-username $(acrName) --registry-password $(acrPassword) --dns-name-label horror-movie-app --ports 80'
+#         addSpnToEnvironment: true
 
 - stage: Deploy
   pool:
