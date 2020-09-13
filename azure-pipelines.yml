@@ -47,4 +47,5 @@ stages:
       inputs:
         azuresubscription: $(azureSubscription)
         appName: $(webAppName)
+        package: $(System.DefaultWorkingDirectory)/*/.zip
         appType: webAppLinux
