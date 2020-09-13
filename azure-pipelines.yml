@@ -50,5 +50,5 @@ stages:
       displayName: Azure Web App on Container Deploy
       inputs:
         appName: webappforcontainers
-        azureSubscription: $(Subscription)
+        azureSubscription: $(Connection)
         imageName: $(imageName)
