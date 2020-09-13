@@ -2,12 +2,20 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   buildconfiguration: 'Release'
 
 steps:
+- task: AzureWebAppContainer@1
+  inputs:
+    azureSubscription: 'Connection'
+    appName: 'b04helloworld'
+    deployToSlotOrASE: true
+    resourceGroupName: 'benkacloud'
+    slotName: 'production'
+    containers: 'benkaregistry.azurecr.io'
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
