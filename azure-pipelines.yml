@@ -11,7 +11,7 @@ variables:
   containerRegistry: 'benkaregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
-  imageName: benkakaregistry.azurecr.io/webhelloworldimage:$(tag)
+  imageName: $(containerRegistry)/webhelloworldimage:$(tag)
   webAppName: b04helloworld
   azureSubscription: Connection
   vmImageName: 'ubuntu-latest'
