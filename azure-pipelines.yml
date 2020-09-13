@@ -2,31 +2,31 @@
   - master
 
 pool:
-vmImage: 'ubuntu-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
-buildconfiguration: 'Release'
+  buildconfiguration: 'Release'
 
 steps:
--task: NuGetToolInstaller@1
+- task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
-    inputs:
+  inputs:
     restoreSolution: '$(solution)'
 - task: DotNetCoreCLI@2
-    inputs:
+  inputs:
     command: 'build'
     projects: 'SimpleWebHalloWorld/SimpleWebHalloWorldProj.csproj'
 
 - task: DotNetCoreCLI@2
-    inputs:
+  inputs:
     command: 'publish'
     publishWebProjects: true
     arguments: '--configuration $(buildConfiguration) --output out'
     zipAfterPublish: false
 
 - task: Docker@2
-    inputs:
+  inputs:
     containerRegistry: 'benkaregistry.azurecr.io'
     repository: 'benkaregistry'
     command: 'buildAndPush'
