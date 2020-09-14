@@ -8,7 +8,6 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'bd81848e-35c4-4fff-a8b0-b1dbabb0cd66'
   imageRepository: 'benyttsimplewebhalloworld'
-  containerRegistry: 'benkaregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
   azureSubscription: Connection
