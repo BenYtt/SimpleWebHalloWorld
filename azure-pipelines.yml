@@ -35,23 +35,23 @@ stages:
         tags: |
           $(tag)
 
-- stage: Deploy
-  pool:
-    vmImage: 'ubuntu-latest'
+# - stage: Deploy
+#   pool:
+#     vmImage: 'ubuntu-latest'
 
-  jobs:
-  - job: Deploy
-    steps:
-    - task: AzureRmWebAppDeployment@4
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'Connection'
-        appType: 'webAppContainer'
-        WebAppName: $(webAppName)
-        deployToSlotOrASE: true
-        ResourceGroupName: 'benkacloud'
-        SlotName: 'production'
-        DockerNamespace: '$(containeRregistry)'
-        DockerRepository: '$(imagename)'
-        DockerImageTag: '$(tag)'
+#   jobs:
+#   - job: Deploy
+#     steps:
+#     - task: AzureRmWebAppDeployment@4
+#       inputs:
+#         ConnectionType: 'AzureRM'
+#         azureSubscription: 'Connection'
+#         appType: 'webAppContainer'
+#         WebAppName: $(webAppName)
+#         deployToSlotOrASE: true
+#         ResourceGroupName: 'benkacloud'
+#         SlotName: 'production'
+#         DockerNamespace: '$(containeRregistry)'
+#         DockerRepository: '$(imagename)'
+#         DockerImageTag: '$(tag)'
     
